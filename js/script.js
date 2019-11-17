@@ -75,4 +75,24 @@ $(document).ready(() => {
         });
     })
     .catch((error) => console.log(error));
+
+    // Search Bar 
+    $("#search-input").on("keyup", (event) => {
+        search(event.target.value.toLowerCase());
+    });
+
+    $(".search-container form").on('submit', (event) => {
+        event.preventDefault();
+        search($("#search-input").val().toLowerCase());
+    });
+    function search(searchValue) {
+        let cards = $("#gallery").children(".card");
+        for(let index=0; index<cards.length; index++) {
+            if($(cards[index]).find("#name").text().toLowerCase().includes(searchValue)) {
+                $(cards[index]).show();
+            } else {
+                $(cards[index]).hide();
+            }
+        }
+    }
 });
